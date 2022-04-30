@@ -16,6 +16,24 @@ const client = new MongoClient(uri, {
 });
 
 client.connect((err) => {
+  const termsConditionCollection = client
+    .db("onlineBook")
+    .collection("bookstore");
+
+  // INSERT terms and condition data AT THE DATABASE
+  app.post("/addTermsCondition", (req, res) => {
+    termsConditionCollection.insertOne(req.body).then((result) => {
+      res.send(result);
+    });
+  });
+
+  // get the terms and Condition data from  collection
+  app.get("/getAddTermsCondition", (req, res) => {
+    termsConditionCollection.find({}).toArray((err, documents) => {
+      res.send(documents);
+    });
+  });
+
   //   end the collection
 });
 
