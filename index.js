@@ -32,6 +32,8 @@ client.connect((err) => {
     .db("onlineBook")
     .collection("disclaimer");
 
+  const bookCollection = client.db("onlineBook").collection("books");
+
   // INSERT terms and condition data AT THE DATABASE
   app.post("/addTermsCondition", (req, res) => {
     termsConditionCollection.insertOne(req.body).then((result) => {
@@ -84,6 +86,20 @@ client.connect((err) => {
   // get the front page disclaimer from  collection
   app.get("/getFrontPageDisclaimer", (req, res) => {
     frontPageDisclaimerCollection.find({}).toArray((err, documents) => {
+      res.send(documents);
+    });
+  });
+
+  // INSERT Books DATA AT THE DATABASE
+  app.post("/addBookData", (req, res) => {
+    bookCollection.insertOne(req.body).then((result) => {
+      res.send(result);
+    });
+  });
+
+  // get the Books DATA from  collection
+  app.get("/getBookData", (req, res) => {
+    bookCollection.find({}).toArray((err, documents) => {
       res.send(documents);
     });
   });
