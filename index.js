@@ -20,6 +20,18 @@ client.connect((err) => {
     .db("onlineBook")
     .collection("bookstore");
 
+  const frontPageTopImgCollection = client
+    .db("onlineBook")
+    .collection("topImg");
+
+  const frontPageMiddleImgCollection = client
+    .db("onlineBook")
+    .collection("middleImg");
+
+  const frontPageDisclaimerCollection = client
+    .db("onlineBook")
+    .collection("disclaimer");
+
   // INSERT terms and condition data AT THE DATABASE
   app.post("/addTermsCondition", (req, res) => {
     termsConditionCollection.insertOne(req.body).then((result) => {
@@ -30,6 +42,48 @@ client.connect((err) => {
   // get the terms and Condition data from  collection
   app.get("/getAddTermsCondition", (req, res) => {
     termsConditionCollection.find({}).toArray((err, documents) => {
+      res.send(documents);
+    });
+  });
+
+  // INSERT Top Image AT THE DATABASE
+  app.post("/addFrontPageTopImage", (req, res) => {
+    frontPageTopImgCollection.insertOne(req.body).then((result) => {
+      res.send(result);
+    });
+  });
+
+  // get the front page Top Image from  collection
+  app.get("/getFrontPageTopImage", (req, res) => {
+    frontPageTopImgCollection.find({}).toArray((err, documents) => {
+      res.send(documents);
+    });
+  });
+
+  // INSERT middle Image AT THE DATABASE
+  app.post("/addFrontPageMiddleImage", (req, res) => {
+    frontPageMiddleImgCollection.insertOne(req.body).then((result) => {
+      res.send(result);
+    });
+  });
+
+  // get the front page middle Image from  collection
+  app.get("/getFrontPageMiddleImage", (req, res) => {
+    frontPageMiddleImgCollection.find({}).toArray((err, documents) => {
+      res.send(documents);
+    });
+  });
+
+  // INSERT disclaimer data AT THE DATABASE
+  app.post("/addFrontPageDisclaimer", (req, res) => {
+    frontPageDisclaimerCollection.insertOne(req.body).then((result) => {
+      res.send(result);
+    });
+  });
+
+  // get the front page disclaimer from  collection
+  app.get("/getFrontPageDisclaimer", (req, res) => {
+    frontPageDisclaimerCollection.find({}).toArray((err, documents) => {
       res.send(documents);
     });
   });
