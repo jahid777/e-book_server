@@ -18,7 +18,7 @@ const client = new MongoClient(uri, {
 client.connect((err) => {
   const termsConditionCollection = client
     .db("onlineBook")
-    .collection("bookstore");
+    .collection("termsAndCondition");
 
   const frontPageTopImgCollection = client
     .db("onlineBook")
