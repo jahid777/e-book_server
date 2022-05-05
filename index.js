@@ -32,6 +32,10 @@ client.connect((err) => {
     .db("onlineBook")
     .collection("disclaimer");
 
+  const displayBookBannerImg = client
+    .db("onlineBook")
+    .collection("displayBookImage");
+
   const bookCollection = client.db("onlineBook").collection("books");
 
   // INSERT terms and condition data AT THE DATABASE
@@ -42,7 +46,7 @@ client.connect((err) => {
   });
 
   // get the terms and Condition data from  collection
-  app.get("/getAddTermsCondition", (req, res) => {
+  app.get("/getTermsCondition", (req, res) => {
     termsConditionCollection.find({}).toArray((err, documents) => {
       res.send(documents);
     });
@@ -86,6 +90,20 @@ client.connect((err) => {
   // get the front page disclaimer from  collection
   app.get("/getFrontPageDisclaimer", (req, res) => {
     frontPageDisclaimerCollection.find({}).toArray((err, documents) => {
+      res.send(documents);
+    });
+  });
+
+  //Insert display book top banner Image
+  app.post("/addDisplayBookTopImage", (req, res) => {
+    displayBookBannerImg.insertOne(req.body).then((result) => {
+      res.send(result);
+    });
+  });
+
+  //get the display books top banner
+  app.get("/DisplayBookTopImage", (req, res) => {
+    displayBookBannerImg.find({}).toArray((err, documents) => {
       res.send(documents);
     });
   });
