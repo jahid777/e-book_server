@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
 const cors = require("cors");
+const ObjectId = require("mongodb").ObjectId;
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.7adfu.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
@@ -66,6 +67,16 @@ client.connect((err) => {
     });
   });
 
+  // delete the front page Top Image from  collection
+  app.delete("/topImgdelete/:id", (req, res) => {
+    frontPageTopImgCollection
+      .deleteOne({ _id: ObjectId(req.params.id) })
+      .then((result) => {
+        // console.log(result);
+        result.deletedCount > 0;
+      });
+  });
+
   // INSERT middle Image AT THE DATABASE
   app.post("/addFrontPageMiddleImage", (req, res) => {
     frontPageMiddleImgCollection.insertOne(req.body).then((result) => {
@@ -80,6 +91,16 @@ client.connect((err) => {
     });
   });
 
+  // delete the front page middle Image from  collection
+  app.delete("/middleImgdelete/:id", (req, res) => {
+    frontPageMiddleImgCollection
+      .deleteOne({ _id: ObjectId(req.params.id) })
+      .then((result) => {
+        // console.log(result);
+        result.deletedCount > 0;
+      });
+  });
+
   // INSERT disclaimer data AT THE DATABASE
   app.post("/addFrontPageDisclaimer", (req, res) => {
     frontPageDisclaimerCollection.insertOne(req.body).then((result) => {
@@ -92,6 +113,16 @@ client.connect((err) => {
     frontPageDisclaimerCollection.find({}).toArray((err, documents) => {
       res.send(documents);
     });
+  });
+
+  // delete the front page disclaimer from  collection
+  app.delete("/disclaimerDelete/:id", (req, res) => {
+    frontPageDisclaimerCollection
+      .deleteOne({ _id: ObjectId(req.params.id) })
+      .then((result) => {
+        // console.log(result);
+        result.deletedCount > 0;
+      });
   });
 
   //Insert display book top banner Image
