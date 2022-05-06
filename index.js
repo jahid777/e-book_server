@@ -53,21 +53,31 @@ client.connect((err) => {
     });
   });
 
-  // INSERT Top Image AT THE DATABASE
+  //delete the terms and condition data from database
+  app.delete("/termsConditiondelete/:id", (req, res) => {
+    termsConditionCollection
+      .deleteOne({ _id: ObjectId(req.params.id) })
+      .then((result) => {
+        // console.log(result);
+        result.deletedCount > 0;
+      });
+  });
+
+  // INSERT Top Image  AT THE DATABASE home page
   app.post("/addFrontPageTopImage", (req, res) => {
     frontPageTopImgCollection.insertOne(req.body).then((result) => {
       res.send(result);
     });
   });
 
-  // get the front page Top Image from  collection
+  // get the front page Top Image from  collection home page
   app.get("/getFrontPageTopImage", (req, res) => {
     frontPageTopImgCollection.find({}).toArray((err, documents) => {
       res.send(documents);
     });
   });
 
-  // delete the front page Top Image from  collection
+  // delete the front page Top Image from  collection home page
   app.delete("/topImgdelete/:id", (req, res) => {
     frontPageTopImgCollection
       .deleteOne({ _id: ObjectId(req.params.id) })
@@ -77,21 +87,21 @@ client.connect((err) => {
       });
   });
 
-  // INSERT middle Image AT THE DATABASE
+  // INSERT middle Image AT THE DATABASE home page
   app.post("/addFrontPageMiddleImage", (req, res) => {
     frontPageMiddleImgCollection.insertOne(req.body).then((result) => {
       res.send(result);
     });
   });
 
-  // get the front page middle Image from  collection
+  // get the front page middle Image from  collection home page
   app.get("/getFrontPageMiddleImage", (req, res) => {
     frontPageMiddleImgCollection.find({}).toArray((err, documents) => {
       res.send(documents);
     });
   });
 
-  // delete the front page middle Image from  collection
+  // delete the front page middle Image from  collection home page
   app.delete("/middleImgdelete/:id", (req, res) => {
     frontPageMiddleImgCollection
       .deleteOne({ _id: ObjectId(req.params.id) })
@@ -101,21 +111,21 @@ client.connect((err) => {
       });
   });
 
-  // INSERT disclaimer data AT THE DATABASE
+  // INSERT disclaimer data AT THE DATABASE home page
   app.post("/addFrontPageDisclaimer", (req, res) => {
     frontPageDisclaimerCollection.insertOne(req.body).then((result) => {
       res.send(result);
     });
   });
 
-  // get the front page disclaimer from  collection
+  // get the front page disclaimer from  collection home page
   app.get("/getFrontPageDisclaimer", (req, res) => {
     frontPageDisclaimerCollection.find({}).toArray((err, documents) => {
       res.send(documents);
     });
   });
 
-  // delete the front page disclaimer from  collection
+  // delete the front page disclaimer from  collection home page
   app.delete("/disclaimerDelete/:id", (req, res) => {
     frontPageDisclaimerCollection
       .deleteOne({ _id: ObjectId(req.params.id) })
@@ -125,7 +135,7 @@ client.connect((err) => {
       });
   });
 
-  //Insert display book top banner Image
+  //Insert display book top banner Image books display page
   app.post("/addDisplayBookTopImage", (req, res) => {
     displayBookBannerImg.insertOne(req.body).then((result) => {
       res.send(result);
