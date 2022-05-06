@@ -149,6 +149,16 @@ client.connect((err) => {
     });
   });
 
+  //delete the display book banner
+  app.delete("/bookDisplayImgdelete/:id", (req, res) => {
+    displayBookBannerImg
+      .deleteOne({ _id: ObjectId(req.params.id) })
+      .then((result) => {
+        // console.log(result);
+        result.deletedCount > 0;
+      });
+  });
+
   // INSERT Books DATA AT THE DATABASE
   app.post("/addBookData", (req, res) => {
     bookCollection.insertOne(req.body).then((result) => {
