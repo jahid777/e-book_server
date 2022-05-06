@@ -173,6 +173,49 @@ client.connect((err) => {
     });
   });
 
+  //get the single book for editing from collection
+  app.get("/singleBook/:id", (req, res) => {
+    bookCollection
+      .find({ _id: ObjectId(req.params.id) })
+      .toArray((err, documents) => {
+        res.send(documents[0]);
+      });
+  });
+
+  //update books data edit
+  app.patch("/updateBook/:id", (req, res) => {
+    bookCollection
+      .updateOne(
+        { _id: ObjectId(req.params.id) },
+        {
+          $set: {
+            bookImg: req.body.bookImg,
+            bookName: req.body.bookName,
+            authorName: req.body.authorName,
+            isbm: req.body.isbm,
+            bookNumber: req.body.bookNumber,
+            bookLink: req.body.bookLink,
+          },
+        }
+      )
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+
+  //delete the books data from colletion
+  app.delete("/bookDelete/:id", (req, res) => {
+    bookCollection
+      .deleteOne({ _id: ObjectId(req.params.id) })
+      .then((result) => {
+        // console.log(result);
+        result.deletedCount > 0;
+      });
+  });
+
   //   end the collection
 });
 
