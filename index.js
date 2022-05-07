@@ -195,6 +195,7 @@ client.connect((err) => {
             isbm: req.body.isbm,
             bookNumber: req.body.bookNumber,
             bookLink: req.body.bookLink,
+            downloadBookLink: req.body.downloadBookLink,
           },
         }
       )
