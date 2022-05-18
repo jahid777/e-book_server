@@ -54,13 +54,18 @@ client.connect((err) => {
   });
 
   //delete the terms and condition data from database
-  app.delete("/termsConditiondelete/:id", (req, res) => {
-    termsConditionCollection
-      .deleteOne({ _id: ObjectId(req.params.id) })
-      .then((result) => {
-        // console.log(result);
-        result.deletedCount > 0;
+  app.delete("/termsConditiondelete/:id", async (req, res) => {
+    try {
+      const termsConditionId = req.params.id;
+      const result = await termsConditionCollection.deleteOne({
+        _id: ObjectId(termsConditionId),
       });
+      if (result.deletedCount > 0) {
+        res.send(true);
+      }
+    } catch (error) {
+      console.log("err", error);
+    }
   });
 
   // INSERT Top Image  AT THE DATABASE home page
@@ -78,13 +83,18 @@ client.connect((err) => {
   });
 
   // delete the front page Top Image from  collection home page
-  app.delete("/topImgdelete/:id", (req, res) => {
-    frontPageTopImgCollection
-      .deleteOne({ _id: ObjectId(req.params.id) })
-      .then((result) => {
-        // console.log(result);
-        result.deletedCount > 0;
+  app.delete("/topImgdelete/:id", async (req, res) => {
+    try {
+      const FrontTopImgId = req.params.id;
+      const result = await frontPageTopImgCollection.deleteOne({
+        _id: ObjectId(FrontTopImgId),
       });
+      if (result.deletedCount > 0) {
+        res.send(true);
+      }
+    } catch (error) {
+      console.log("err", error);
+    }
   });
 
   // INSERT middle Image AT THE DATABASE home page
@@ -102,13 +112,18 @@ client.connect((err) => {
   });
 
   // delete the front page middle Image from  collection home page
-  app.delete("/middleImgdelete/:id", (req, res) => {
-    frontPageMiddleImgCollection
-      .deleteOne({ _id: ObjectId(req.params.id) })
-      .then((result) => {
-        // console.log(result);
-        result.deletedCount > 0;
+  app.delete("/middleImgdelete/:id", async (req, res) => {
+    try {
+      const FrontMidImgId = req.params.id;
+      const result = await frontPageMiddleImgCollection.deleteOne({
+        _id: ObjectId(FrontMidImgId),
       });
+      if (result.deletedCount > 0) {
+        res.send(true);
+      }
+    } catch (error) {
+      console.log("err", error);
+    }
   });
 
   // INSERT disclaimer data AT THE DATABASE home page
@@ -126,13 +141,18 @@ client.connect((err) => {
   });
 
   // delete the front page disclaimer from  collection home page
-  app.delete("/disclaimerDelete/:id", (req, res) => {
-    frontPageDisclaimerCollection
-      .deleteOne({ _id: ObjectId(req.params.id) })
-      .then((result) => {
-        // console.log(result);
-        result.deletedCount > 0;
+  app.delete("/disclaimerDelete/:id", async (req, res) => {
+    try {
+      const FrontDisclaimerId = req.params.id;
+      const result = await frontPageDisclaimerCollection.deleteOne({
+        _id: ObjectId(FrontDisclaimerId),
       });
+      if (result.deletedCount > 0) {
+        res.send(true);
+      }
+    } catch (error) {
+      console.log("err", error);
+    }
   });
 
   //Insert display book top banner Image books display page
@@ -150,13 +170,18 @@ client.connect((err) => {
   });
 
   //delete the display book banner
-  app.delete("/bookDisplayImgdelete/:id", (req, res) => {
-    displayBookBannerImg
-      .deleteOne({ _id: ObjectId(req.params.id) })
-      .then((result) => {
-        // console.log(result);
-        result.deletedCount > 0;
+  app.delete("/bookDisplayImgdelete/:id", async (req, res) => {
+    try {
+      const displayBooksBannerImgId = req.params.id;
+      const result = await displayBookBannerImg.deleteOne({
+        _id: ObjectId(displayBooksBannerImgId),
       });
+      if (result.deletedCount > 0) {
+        res.send(true);
+      }
+    } catch (error) {
+      console.log("err", error);
+    }
   });
 
   // INSERT Books DATA AT THE DATABASE
@@ -208,13 +233,18 @@ client.connect((err) => {
   });
 
   //delete the books data from colletion
-  app.delete("/bookDelete/:id", (req, res) => {
-    bookCollection
-      .deleteOne({ _id: ObjectId(req.params.id) })
-      .then((result) => {
-        // console.log(result);
-        result.deletedCount > 0;
+  app.delete("/bookDelete/:id", async (req, res) => {
+    try {
+      const booksId = req.params.id;
+      const result = await bookCollection.deleteOne({
+        _id: ObjectId(booksId),
       });
+      if (result.deletedCount > 0) {
+        res.send(true);
+      }
+    } catch (error) {
+      console.log("err", error);
+    }
   });
 
   //   end the collection
