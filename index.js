@@ -217,7 +217,7 @@ client.connect((err) => {
             bookImg: req.body.bookImg,
             bookName: req.body.bookName,
             authorName: req.body.authorName,
-            isbm: req.body.isbm,
+            isbn: req.body.isbn,
             bookNumber: req.body.bookNumber,
             bookLink: req.body.bookLink,
             downloadBookLink: req.body.downloadBookLink,
