@@ -3,6 +3,7 @@ require("dotenv").config();
 const { MongoClient } = require("mongodb");
 const cors = require("cors");
 const ObjectId = require("mongodb").ObjectId;
+var bodyParser = require("body-parser");
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.7adfu.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
@@ -10,6 +11,12 @@ const port = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
